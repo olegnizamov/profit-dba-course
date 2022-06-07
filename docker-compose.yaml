@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    command: --max_allowed_packet=100M --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - profit_my_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "profit"
+      MYSQL_USER: "profit"
+      MYSQL_PASSWORD: "profit"
+      LANG: C.UTF-8
+    ports:
+      - '3306:3306'
+
+  postgres:
+    image: postgres:14
+    volumes:
+      - profit_pg_data:/var/lib/postgresql/data
+    environment:
+      TZ: Europe/Moscow
+      POSTGRES_PASSWORD: "profit"
+      POSTGRES_USER: "profit"
+      POSTGRES_DB: "profit"
+    ports:
+      - '5432:5432'
+
+volumes:
+  profit_my_data:
+  profit_pg_data:
