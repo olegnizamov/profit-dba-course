@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    command: --max_allowed_packet=100M  --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - profit_my_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: "profit"
+      MYSQL_USER: "profit"
+      MYSQL_PASSWORD: "profit"
+      LANG: C.UTF-8
+    ports:
+      - '3306:3306'
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+
+volumes:
+  profit_my_data:
